@@ -9,10 +9,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="o-container">
-      {state.map(({ url, city }, id) => (
-        <Card key={id} url={url} city={city} />
-      ))}
-    </div>
+    <>
+      <div className="o-container">
+        {state.map(({ url, city }, id) => (
+          <Card key={id} url={url} city={city} />
+        ))}
+      </div>
+    </>
   );
 }

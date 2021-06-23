@@ -13,7 +13,7 @@ h5 {
   width: 280px;
   height: 507px;
   display: flex;
-
+  background-color: white;
   flex-direction: column;
   margin: 10px;
   border-radius: 20px;
