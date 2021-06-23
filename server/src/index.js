@@ -28,8 +28,12 @@ function verificationKey(req, res, next) {
   }
 }
 //routes GET
-app.get("/data/:key", verificationKey, (req, res) => {
-  res.json(data);
+app.get("/data/:key", verificationKey, ({ params: { key } }, res) => {
+  if (key == "Cali") {
+    res.json(data);
+  } else {
+    res.json({ Error: "City no found" });
+  }
 });
 
 app.listen(app.get("PORT"), () => {
