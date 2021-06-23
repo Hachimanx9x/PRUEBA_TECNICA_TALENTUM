@@ -83,11 +83,12 @@ h5 {
 .o-card__head .o-data__description p span {
   font-weight: 700;
 }
+/*
 .o-card__head-bg {
   background-image: url("../../assets/imgs/background.png");
   background-size: cover;
   background-repeat: no-repeat;
-}
+}*/
 .o-card__body {
   color: var(--color-grey);
   padding: 10px;

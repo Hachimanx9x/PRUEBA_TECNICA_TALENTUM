@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./Card.css";
 
 import humidity from "../../assets/icons/humidity.png";
 import temp from "../../assets/icons/temp.png";
@@ -64,10 +64,11 @@ function ErrorCard({ infoError }) {
   );
 }
 
-//Template Card
-function CardTemplate({ dataWeather }) {
+//  Card Template
+function CardTemplate({ dataWeather, bgImg }) {
   const [dateInfo, setDateInfo] = useState();
   useEffect(() => {
+    // console.log(bgImg);
     const DateInfo = new Date();
     //day number , month name, year number
     setDateInfo(
@@ -77,56 +78,63 @@ function CardTemplate({ dataWeather }) {
     );
   }, []);
   return (
-    <div className="o-card">
-      <div className="o-card__head o-card__head-bg">
-        <div className="o-data__localization">
-          <h3>
-            {dataWeather.location === "Cali"
-              ? "SANTIAGO DE CALI"
-              : "OTHER LOCATION"}
-          </h3>
-          <h5>{dateInfo}</h5>
-          <h2>{dataWeather.temperature}°</h2>
+    <>
+      {" "}
+      <div className="o-card">
+        <div className="o-card__head o-card__head-bg">
+          <div className="o-data__localization">
+            <h3>
+              {dataWeather.location === "Cali"
+                ? "SANTIAGO DE CALI"
+                : "OTHER LOCATION"}
+            </h3>
+            <h5>{dateInfo}</h5>
+            <h2>{dataWeather.temperature}°</h2>
+          </div>
+          <div className="o-data__description">
+            <p>
+              {" "}
+              <span>Clima</span> / {dataWeather.weather}
+            </p>
+          </div>
         </div>
-        <div className="o-data__description">
-          <p>
-            {" "}
-            <span>Clima</span> / {dataWeather.weather}
-          </p>
+        <div className="o-card__body">
+          <div className="o-item-data  o-border">
+            <div className="o-info">
+              <img src={temp} alt="Temperature" /> Temperatura
+            </div>
+
+            <p>{dataWeather.temperature}</p>
+          </div>
+
+          <div className="o-item-data  o-border">
+            <div className="o-info">
+              <img src={humidity} alt="Humidity" /> Húmedad
+            </div>
+
+            <p>{dataWeather.humidity}%</p>
+          </div>
+          <div className="o-item-data">
+            <div className="o-info">
+              <img src={wind} alt="Wind" /> Velocidad Viento
+            </div>
+
+            <p>{dataWeather.windSpeed} m/s</p>
+          </div>
         </div>
       </div>
-      <div className="o-card__body">
-        <div className="o-item-data  o-border">
-          <div className="o-info">
-            <img src={temp} alt="Temperature" /> Temperatura
-          </div>
-
-          <p>{dataWeather.temperature}</p>
-        </div>
-
-        <div className="o-item-data  o-border">
-          <div className="o-info">
-            <img src={humidity} alt="Humidity" /> Húmedad
-          </div>
-
-          <p>{dataWeather.humidity}%</p>
-        </div>
-        <div className="o-item-data">
-          <div className="o-info">
-            <img src={wind} alt="Wind" /> Velocidad Viento
-          </div>
-
-          <p>{dataWeather.windSpeed} m/s</p>
-        </div>
-      </div>
-    </div>
+      <style jsx>{`
+        .o-card__head-bg {
+          background-image: url(${bgImg});
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+      `}</style>
+    </>
   );
 }
 
-export default function Card({
-  url = "http://localhost:3030/data",
-  city = "Cali",
-}) {
+export default function Card({ url, city, bgImg }) {
   const [dataWeather, setDataWeather] = useState(null);
   const [errorCard, setErrorCard] = useState(null);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -147,7 +155,7 @@ export default function Card({
   }, []);
 
   if (dataWeather) {
-    return <CardTemplate dataWeather={dataWeather} />;
+    return <CardTemplate dataWeather={dataWeather} bgImg={bgImg} />;
   } else if (errorCard) {
     return <ErrorCard infoError={errorCard} />;
   } else {
