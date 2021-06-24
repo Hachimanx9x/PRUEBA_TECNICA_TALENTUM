@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../components/Card";
+import { Card } from "../../components/Card";
 import BackgroundImg from "../../assets/imgs/background.png";
 import "./Home.css";
 export default function Home() {
@@ -15,8 +15,8 @@ export default function Home() {
       bgImg: BackgroundImg,
     },
     {
-      url: "http://localhost:3030",
-      city: "Medellin",
+      url: "http://localhost:3030/data",
+      city: "null",
       bgImg: BackgroundImg,
     },
   ];

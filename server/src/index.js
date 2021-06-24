@@ -2,6 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 const { data } = require("./data");
+
+const chalk = require("chalk");
 const GLOBALKEY = "prueba_tecnica_talentum";
 const app = express();
 
@@ -9,12 +11,15 @@ const app = express();
 app.set("PORT", process.env.PORT || 3030);
 
 //Middleware
-app.use(cors());
-function verificationKey(req, res, next) {
+app.use(cors()); //cors
+
+app.use(function (req, res, next) {
+  //key validation and origin
   const headerKey = req.headers["key"];
   const origin = req.headers["origin"];
 
   if (typeof headerKey !== "undefined" && origin === "http://localhost:3000") {
+    console.log(chalk.blue(`The origin ${origin} valid its key`));
     const key = headerKey.split(" ");
     const keyToken = key[1];
 
@@ -26,13 +31,16 @@ function verificationKey(req, res, next) {
   } else {
     res.sendStatus(403);
   }
-}
+});
+
 //routes GET
-app.get("/data/:key", verificationKey, ({ params: { key } }, res) => {
+app.get("/data/:key", ({ params: { key } }, res) => {
+  console.log(chalk.green("Enter the route with the key ") + chalk.blue(key));
   if (key == "Cali") {
     res.json(data);
+  } else if (key == "null") {
   } else {
-    res.json({ Error: "City no found" });
+    res.sendStatus(404);
   }
 });
 

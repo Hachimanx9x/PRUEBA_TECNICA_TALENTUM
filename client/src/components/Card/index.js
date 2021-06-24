@@ -1,3 +1,3 @@
 import Card from "./Card";
-
-export default Card;
+import CardContainer from "./CardContainer";
+export { Card, CardContainer };
