@@ -54,7 +54,7 @@ export default function CardTemplate({ dataWeather, bgImg }) {
             <h3>
               {dataWeather.location === "Cali"
                 ? "SANTIAGO DE CALI"
-                : "OTHER LOCATION"}
+                : dataWeather.location}
             </h3>
             <h5>{dateInfo}</h5>
             <h2>{dataWeather.temperature}°</h2>

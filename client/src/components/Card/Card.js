@@ -13,7 +13,7 @@ export default function Card({ url, city, bgImg }) {
   useEffect(async () => {
     await Get(url, city)
       .then((response) => {
-        //   console.log(response);
+        //  console.log(response);
         setDataWeather({
           location: response.name,
           temperature: KelvinToCelsius(response.main.temp),

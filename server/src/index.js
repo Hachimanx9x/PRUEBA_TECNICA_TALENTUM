@@ -9,7 +9,7 @@ const app = express();
 
 //configuration express
 app.set("PORT", process.env.PORT || 3030);
-
+app.set("ORIGIN", process.env.ORIGIN || "http://localhost:3000");
 //Middleware
 app.use(cors()); //cors
 
@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
   const headerKey = req.headers["key"];
   const origin = req.headers["origin"];
 
-  if (typeof headerKey !== "undefined" && origin === "http://localhost:3000") {
+  if (typeof headerKey !== "undefined" && origin === app.get("ORIGIN")) {
     console.log(chalk.blue(`The origin ${origin} valid its key`));
     const key = headerKey.split(" ");
     const keyToken = key[1];
@@ -38,7 +38,8 @@ app.get("/data/:key", ({ params: { key } }, res) => {
   console.log(chalk.green("Enter the route with the key ") + chalk.blue(key));
   if (key == "Cali") {
     res.json(data);
-  } else if (key == "null") {
+  } else if (key == "Medellin") {
+    res.json(data);
   } else {
     res.sendStatus(404);
   }
