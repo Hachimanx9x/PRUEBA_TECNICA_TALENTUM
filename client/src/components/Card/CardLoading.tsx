@@ -21,7 +21,7 @@ export default function LoadingCard() {
   return (
     <div className="o-card-loading">
       <IconLoading className="o-icon " />
-      <h3>Cargando</h3>
+      <h3>Loading</h3>
     </div>
   );
 }
