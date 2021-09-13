@@ -16,6 +16,7 @@ type dataWeather = {
   windSpeed?: number;
   weather?: string;
 };
+//functions
 function Weather(info: string) {
   if (info === "Clouds") {
     return "Nublado";
@@ -28,9 +29,9 @@ function Weather(info: string) {
   }
 }
 //variables
-let weather: any = null;
+let weather: dataWeather = {};
 //functions
-function _default(location: string) {
+function _default(location: string): dataWeather {
   return {
     location: location,
     temperature: 0,
@@ -42,6 +43,7 @@ function _default(location: string) {
 function KelvinToCelsius(kelvin: number) {
   return kelvin - 273.15;
 }
+
 function filterInfo(data: resultApi): dataWeather {
   return {
     location: data.name,
